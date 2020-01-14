@@ -7,6 +7,7 @@ export default class CounterStore {
     this.rootStore = rootStore;
   }
 
+  // These 2 functions don't need to be decorated as actions because all they do is call out to a different action that's already decorated:
   increment() {
     this.setCount(this.count + 1);
   };

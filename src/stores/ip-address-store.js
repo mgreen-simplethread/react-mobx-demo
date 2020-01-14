@@ -21,6 +21,10 @@ export default class IpAddressStore {
     }
   }
 
+  @action clearIpAddress = () => {
+    this.ipAddress = null;
+  }
+
   @action setIpAddress = (addr) => {
     this.ipAddress = addr;
   };

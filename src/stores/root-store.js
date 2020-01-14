@@ -10,9 +10,9 @@ export default class RootStore {
 
   constructor() {
     // Child store instances:
-    this.ipAddressStore = new IpAddressStore(this);
-    this.counterStore = new CounterStore(this);
-    this.todoListStore = new TodoListStore(this);
+    this.ipAddress = new IpAddressStore(this);
+    this.counter = new CounterStore(this);
+    this.todoList = new TodoListStore(this);
 
     console.log('Initialize RootStore: %O', this);
   }
