@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import IpAddressStore from './ip-address-store';
 import CounterStore from './counter-store';
 import TodoListStore from './todo-list-store';
@@ -15,6 +15,10 @@ export default class RootStore {
     this.todoList = new TodoListStore(this);
 
     console.log('Initialize RootStore: %O', this);
+  }
+
+  @computed get isLoading() {
+    return this.networkStatus === 'loading';
   }
 
   /**
