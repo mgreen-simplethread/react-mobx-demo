@@ -1,16 +1,23 @@
 import { action, observable, computed } from 'mobx';
+import nanoid from 'nanoid';
 
 /**
  * A todo task is an object with this structure:
  *
  * {
+ *   id: 'a1234', // set automatically by the store
  *   task: 'Sweep the floor',
  *   done: false
  * }
  */
 
 export default class TodoListStore {
-  @observable todos = [];
+  @observable todosById = new Map();
+
+  constructor(rootStore) {
+    this.rootStore = rootStore;
+    console.log(this);
+  }
 
   /**
    * Computed properties are values that MobX derives lazily. This means that the value of todoStore.completedTodos
@@ -18,6 +25,10 @@ export default class TodoListStore {
    * changes. The value is memoized (cached) so that repeated calls to `completedTodos` don't re-run the filter operation
    * unless it's necessary.
    */
+  @computed get todos() {
+    return [...this.todosById.values()];
+  }
+
   @computed get completedTodos() {
     return this.todos.filter(({ done }) => done);
   }
@@ -26,19 +37,18 @@ export default class TodoListStore {
     return this.todos.filter(({ done }) => !done);
   }
 
-  constructor(rootStore) {
-    this.rootStore = rootStore;
-  }
-
   @action addTodo = (task) => {
-    this.todos.push({ task, done: false });
+    const id = nanoid();
+    this.todosById.set(id, { id, task, done: false });
   };
 
-  @action toggleTodo = (idx) => {
-    this.todos[idx].done = !this.todos[idx].done;
+  @action toggleTodo = (id) => {
+    const todo = this.todosById.get(id);
+    todo.done = !todo.done;
+    this.todosById.set(id, todo);
   };
 
-  @action deleteTodo = (idx) => {
-    this.todos.splice(idx, 1);
+  @action deleteTodo = (id) => {
+    this.todosById.delete(id);
   };
 }

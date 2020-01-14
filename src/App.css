@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.mini-apps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
