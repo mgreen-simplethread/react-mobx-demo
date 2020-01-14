@@ -11,8 +11,11 @@ function Task({ task, done, id, toggleDone, onDelete }) {
   return (
     <div className={klass.join(' ')}>
       <span className="todo__task">{task}</span>
-      <button onClick={toggleDone}>Mark {done ? 'Incomplete' : 'Complete'}</button>
-      <button onClick={onDelete}>Delete</button>
+
+      <div className="todo__actions">
+        <button onClick={toggleDone}>Mark {done ? 'Incomplete' : 'Complete'}</button>
+        <button onClick={onDelete}>Delete</button>
+      </div>
     </div>
   );
 }

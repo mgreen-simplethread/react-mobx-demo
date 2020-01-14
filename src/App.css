@@ -44,3 +44,9 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+.todo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
